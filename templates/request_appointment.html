@@ -1,0 +1,129 @@
+<!-- request_appointment.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+
+    <title>Request Appointment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: rgba(135, 243, 243, 0.8);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: rgba(244, 247, 247, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+       }
+
+        h2 {
+            color: #0d3d6d;
+        }
+
+        .slots {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .slot {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .calendar {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .time-container {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #hours,
+        #minutes,
+        #ampm {
+            margin: 0 5px;
+            width: 50px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #FF6347;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #32CD32;
+        }
+        #doctorDetails {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #0d3d6d;
+            border-collapse: collapse;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Doctor Details</h2>
+        <table id="doctorDetails" border="1">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Speciality</th>
+                <th>Address</th>
+            </tr>
+            <tr>
+                <td id="firstName"></td>
+                <td id="lastName"></td>
+                <td id="speciality"></td>
+                <td id="address"></td>
+            </tr>
+            <tr>
+                <td>{{docdetails[0]}}</td>
+                <td>{{docdetails[1]}}</td>
+                <td>{{docdetails[7]}}</td>
+                <td>{{docdetails[4]}}</td>
+        </table><br>
+        <form action="/confirmation" method="POST">
+            <label for="appDate">Select Date:</label>
+            <input type="date" id="appDate" name="appDate" required><br>
+            <input type="hidden" id="docId" name="docId" value="{{docdetails[5]}}">
+            <input type="hidden" id="patId" name="patId" value="">
+            <input type="submit" value="Book Appointment" class="btn">
+        </form>
+    </div>
+</body>
+</html>

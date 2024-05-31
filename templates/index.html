@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+    <style>
+        body {
+            
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body class="index-background">
+    <div class="container">
+        <header>
+            <h1>Disease Checker</h1>
+        </header>
+        <main>
+            
+            
+            <form method="POST" action="/check">
+                <label for="symptoms">Enter Symptoms (comma-separated):</label>
+                <input type="text" name="symptoms" id="symptoms">
+
+                <fieldset>
+                    <legend>Common Symptoms:</legend>
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="symptom" id="fever" value="fever">
+                        <label for="fever">Fever</label>
+
+                        <input type="checkbox" name="symptom" id="cough" value="cough">
+                        <label for="cough">Cough</label>
+
+                        <input type="checkbox" name="symptom" id="fatigue" value="fatigue">
+                        <label for="fatigue">Fatigue</label>
+
+                        <input type="checkbox" name="symptom" id="headache" value="headache">
+                        <label for="headache">Headache</label>
+
+                        <input type="checkbox" name="symptom" id="shortness_of_breath" value="shortness_of_breath">
+                        <label for="shortness_of_breath">Shortness of Breath</label>
+
+                        <input type="checkbox" name="symptom" id="sore_throat" value="sore_throat">
+                        <label for="sore_throat">Sore Throat</label>
+
+                        <input type="checkbox" name="symptom" id="body_ache" value="body_ache">
+                        <label for="body_ache">Body Ache</label>
+                        
+                        <!-- Add more checkboxes as needed -->
+                    </div>
+                </fieldset>
+                <button type="submit">Check</button>
+            </form>
+        </main>
+    </div>
+</body>
+

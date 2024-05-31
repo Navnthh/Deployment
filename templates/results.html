@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Checker Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+
+    <style>
+        body {
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body class="results-background">
+    <div class="container">
+        <header>
+            <h1>Results</h1>
+        </header>
+        <main>
+            {% if message %}
+            <p>{{ message }}</p>
+            {% else %}
+            {% if result %}
+            <h2>Predicted Disease: {{ result.predicted_disease }}</h2>
+            <p>Symptoms: {{ result.symptoms }}</p>
+            {% else %}
+            <p>Sorry, the disease for your symptoms is not found.</p>
+            {% endif %}
+            {% endif %}
+            <a href="/index">Go back to the home page</a>
+            <h3>NOTE: We recommend you to consult a doctor for actual disease prediction</h3>
+        </main>
+    </div>
+</body>
+
+</html>

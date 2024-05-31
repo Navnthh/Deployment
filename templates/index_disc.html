@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Forum</title>
+ 
+    <style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; 
+    overflow-y: auto; 
+    background: linear-gradient(-45deg, #3498db, #2980b9, #3498db, #2980b9); 
+    color: #fff; 
+    transition: background-position 0.5s ease; 
+}
+body:hover {
+    background-position: 100% 50%; 
+}
+
+.navbar {
+    background-color: #2c3e50; 
+    color: #fff; 
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar a {
+    color: #fff; 
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+#app {
+    background-color: #fff; 
+    padding: 30px;
+    border: 1px solid #3498db;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.2);
+    width: 80%;
+    max-width: 800px;
+    margin-top: 20px;
+    transition: box-shadow 0.3s;
+}
+
+.post {
+    background-color: #ecf0f1; 
+    margin-bottom: 15px; 
+    margin-top: 20px; 
+    padding: 15px; 
+    border: 1px solid #3498db; 
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post:hover {
+    transform: translateY(-4px); 
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.2); 
+}
+
+.post h2 {
+    color: #3498db; 
+    margin-bottom: 10px; 
+}
+
+.post p {
+    color: #555; 
+    margin-bottom: 10px; 
+}
+
+.post-actions button {
+    margin-right: 15px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.post-actions button:hover {
+    background-color: #2980b9; 
+}
+
+.comments-section textarea {
+    width: calc(100% - 20px);
+    padding: 15px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border: 1px solid #3498db;
+    border-radius: 6px;
+    outline: none;
+    color: #333; 
+    transition: border-color 0.3s;
+}
+
+.comments-section textarea:focus {
+    border-color: #3498db; 
+}
+
+.comments-list .comment {
+    background-color: #ecf0f1; 
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+button {
+    padding: 15px 25px;
+    background-color: #3498db; 
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9; 
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.sorting-options {
+            position: fixed;
+            top: 60px; 
+            right: 10px; 
+            display: flex;
+            align-items: center;
+        }
+
+        .sorting-options label {
+            margin-right: 5px; 
+        }
+
+        .sorting-options select {
+            padding: 5px; 
+        }
+        .post-actions button.delete {
+            background-color: #e74c3c; 
+        }
+
+        .post-actions button.delete:hover {
+            background-color: #c0392b; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sorting-options">
+        <label for="sort">Sort by:</label>
+        <select id="sort" onchange="changeSortOrder(this.value)">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+        </select>
+    </div>
+
+    <div class="navbar">
+        <a href="/index_disc">Posts</a>
+        <a href="/new_post">Add a New Post &#43;</a>
+    </div>
+
+    <div id="app" class="container">
+        <div id="posts">
+            {% for post in posts[::-1] %}
+                <div id="{{ post.id }}" class="post">
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.content }}</p>
+                    <div class="post-actions">
+                        <button onclick="reactToPost('{{ post.id }}', 'like')">Like ({{ post.likes }})</button>
+                        <button onclick="reactToPost('{{ post.id }}', 'dislike')">Dislike ({{ post.dislikes }})</button>
+                    </div>
+                   
+                    <div class="comments-section">
+                        <textarea id="comment-content-{{ post.id }}" placeholder="Write your comment"></textarea>
+                        <button onclick="addComment('{{ post.id }}', document.getElementById('comment-content-{{ post.id }}'))">Comment</button>
+                    </div>
+                    <div class="comments-list">
+                        {% if post.replies %}
+                            {% for comment in post.replies[::-1] %}
+                                <div class="comment">{{ comment.content }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='script2.js') }}"></script>
+</body>
+</html>

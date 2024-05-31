@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Post</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: background-position 0.5s ease; 
+        }
+
+        body:hover {
+            background-position: 100% 50%; 
+        }
+
+        .navbar {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #app {
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 800px;
+            margin-top: 20px;
+            transition: box-shadow 0.3s;
+        }
+
+        #new-post {
+            text-align: center;
+        }
+
+        #new-post h2 {
+            color: #131313;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+        }
+
+        table tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        table td {
+            padding: 20px;
+            text-align: left;
+        }
+
+        table td input, table td textarea {
+            width: calc(100% - 10px);
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        table td input:focus, table td textarea:focus {
+            border-color: #3498db;
+        }
+
+        button {
+            padding: 15px 25px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/index_disc">Posts</a>
+        <a href="/new_post">Add a New Post &#43;</a>
+    </div>
+
+    <div id="app" class="container">
+        <div id="new-post">
+            <h2>Add a New Post</h2>
+            <table>
+                <tr>
+                    <td>Title:</td>
+                    <td><input type="text" id="post-title" placeholder="Enter the post title"></td>
+                </tr>
+                <tr>
+                    <td>Body:</td>
+                    <td><textarea id="post-content" placeholder="Write your post"></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button onclick="createPost()">Post</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

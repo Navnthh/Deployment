@@ -1,0 +1,98 @@
+/* styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2a2a2a; /* Make background fully transparent */
+    background-image: url('your_image_filename.jpg'); /* Add your image file path */
+    background-size: cover;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(99, 234, 255, 0.7); /* Set a semi-transparent background for the container */
+    box-shadow: 0 0 10px rgba(126, 216, 255, 0.01);
+}
+
+header, main {
+    text-align: center;
+}
+
+header h1 {
+    color: #000000;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+input[type="text"], input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.button:hover {
+    transform: scale(1.0);
+    background-color: #44b448;
+}
+
+main p {
+    margin-top: 20px;
+    color: #333;
+}
+
+a {
+    color: #44b448;
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.index-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.result-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+header, h3{
+    color:crimson;
+}
+header, h4{
+    color:rgb(17, 16, 17);
+    font-style: oblique;
+    font-size:larger;
+}

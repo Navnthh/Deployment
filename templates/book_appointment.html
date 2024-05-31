@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+    <title>Book Appointment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            background-color: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 10px
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        a {
+            text-decoration: none;
+            color: #1E90FF
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+       
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #FF6347;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #32CD32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: black;">Select a Doctor</h2>
+        <!-- Search Bar -->
+        <input type="text" id="searchInput" name="q" class="search-bar"  placeholder="Search by Doctor's Name, Specialization" hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target="#results">
+        <input type="button" value="Search" onclick="searchDoctors()" class="btn btn-primary">
+        <ul id="doctorList">
+            <!-- Doctors Information -->
+            <li class="doctor-profile">
+                <table>
+                    <tr style="background-color: rgb(0, 0, 0);">
+                        <td>First Name</td>
+                        <td>Last Name</td>
+                        <td>Address</td>
+                        <td>Speciality</td>
+                        <td>Action</td>
+                        
+                    </tr>
+                    {% if l4>0 %}
+                    {% for i in range(l4)%}
+                    <tr style="background-color: rgb(0, 0, 0);">
+                        <td>{{registered_doctors[i][0]}}</td>
+                        <td>{{registered_doctors[i][1]}}</td>
+                        <td>{{registered_doctors[i][4]}}</td>
+                        <td>{{registered_doctors[i][7]}}</td>
+                        <td><a href="/request_appointment?docid={{registered_doctors[i][5]}}"><button type='submit' class='btn btn-danger'>Book</button></a></td>
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+                </table>
+            </li>
+            
+            <!-- Add more doctors with similar structure -->
+        </ul>
+        
+        
+    </div>
+
+    <script>
+    function searchDoctors() {
+    var input, filter, table, tr, i, txtValue;
+    input = document.getElementById('searchInput');
+    filter = input.value.toUpperCase();
+    table = document.getElementById('doctorList').getElementsByTagName('table')[0];
+    tr = table.getElementsByTagName('tr');
+
+    var found = false;
+
+    for (i = 1; i < tr.length; i++) { // Start from 1 to skip the table header
+        txtValue = tr[i].textContent || tr[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = '';
+            found = true;
+        } else {
+            tr[i].style.display = 'none';
+        }
+    }
+
+    var notFound = document.getElementById('notFound');
+    notFound.style.display = found ? 'none' : '';
+}
+
+    </script>
+</body>
+</html>
